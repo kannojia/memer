@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Memer.js Test</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+	<!-- Demo CSS -->
+	<style>
+
+	body {
+		font-family: sans-serif;
+		text-align: center;
+	}
+
+	#canvas {
+		display: block;
+		margin: 1em auto;
+	}
+
+    .top-text, .bottom-text {
+        height: 25px;
+        font-size: 14px;
+    }
+	</style>
+
+	<script src="../src/memer.js"></script>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script>
+
+	$.fn.ready(function() {
+
+		var meme = new Memer('#canvas');
+        meme.setImage('./matrix_morpheus.jpg');
+
+        var topText = '', bottomText = '';
+
+        var memeLoadEvent = meme.on('onImageLoad', function() {
+            meme.renderImage(topText, bottomText);
+        }, meme);
+
+
+        $('.top-text').on('keyup', function(e) {
+            topText = $(this).val().trim();
+            meme.renderImage(topText, bottomText);
+        });
+
+        $('.bottom-text').on('keyup', function(e) {
+            bottomText = $(this).val().trim();
+            meme.renderImage(topText, bottomText);
+        });
+	});
+
+
+	</script>
+
+</head>
+
+<body>
+
+	<h1>Memer.js demo</h1>
+    <br/><br/>
+    <div>Top Text: <input class="top-text" placeholder="Top Text..."/></div><br/>
+    <div>Bottom Text: <input class="bottom-text" placeholder="Bottom Text..."/></div>
+    <br/>
+
+	<canvas id="canvas"></canvas>
+
+
+</body>
+</html>
